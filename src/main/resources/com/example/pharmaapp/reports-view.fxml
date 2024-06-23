@@ -2,6 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pharmaapp.ReportController">
    <children>
       <HBox layoutX="256.0" prefHeight="60.0" prefWidth="1026.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -26,33 +29,38 @@
                         <Font name="Poppins Regular" size="14.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="449.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/searchIcon.png" />
-                     </image>
-                  </ImageView>
                   <ImageView fitHeight="26.0" fitWidth="28.0" layoutX="622.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/languageIcon.png" />
                      </image>
                   </ImageView>
                   <Text layoutX="652.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="English (US)" />
-                  <Text layoutX="851.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="21 June 2024   22:45:04" x="-1.0" />
-                  <Text layoutX="901.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Good Morning" x="-1.0" />
-                  <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="864.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/ellipse-13.png" />
-                     </image>
-                  </ImageView>
+                  <JFXButton contentDisplay="RIGHT" layoutX="813.0" layoutY="4.0" prefHeight="46.0" prefWidth="192.0" style="-fx-background-color: #ffffff; -fx-font-family: Poppins; -fx-font-size: 14; -fx-border-color: #1D242E; -fx-border-radius: 10; -fx-background-radius: 10;" text="Download Report">
+                     <font>
+                        <Font name="Poppins Regular" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" layoutX="395.0" layoutY="20.0" prefHeight="26.0" prefWidth="77.0" style="-fx-background-color: #e3ebf3; -fx-font-family: Poppins; -fx-font-size: 11; -fx-border-color: #2ed47a; -fx-border-radius: 40; -fx-background-radius: 40;" text="Search">
+                     <font>
+                        <Font name="Poppins ExtraLight Italic" size="11.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/searchIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                </children>
             </Pane>
          </children>
       </HBox>
-      <VBox prefHeight="720.0" prefWidth="256.0" style="-fx-background-color: ash;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="720.0" prefWidth="256.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane cache="true" prefHeight="725.0" prefWidth="256.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+            <Pane cache="true" prefHeight="725.0" prefWidth="256.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
                <children>
-                  <Text layoutX="89.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PharmaApp">
+                  <Text layoutX="89.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pharma">
                      <font>
                         <Font name="Poppins Bold" size="25.0" />
                      </font>
@@ -68,7 +76,7 @@
                      </font>
                   </Text>
                   <Text fill="#fed600" layoutX="103.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super Admin" />
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="201.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-background-color: white; -fx-font-size: 17; -fx-font-weight: 500;" text="Dashboard">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="201.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#switchToDashboard" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-background-color: #ffffff; -fx-font-size: 17; -fx-font-weight: 500;" text="Dashboard">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" layoutX="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -80,7 +88,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="247.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-font-size: 17; -fx-font-weight: 500; -fx-background-color: white;" text="Inventory">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="247.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#switchToInventory" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-font-size: 17; -fx-font-weight: 500; -fx-background-color: #ffffff;" text="Inventory">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true" x="21.0">
                            <image>
@@ -92,7 +100,7 @@
                         <Font name="Poppins SemiBold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="293.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-background-color: white; -fx-font-size: 17; -fx-font-weight: 500;" text="Reports">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="293.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#switchToReports" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-background-color: #01A768; -fx-font-size: 17; -fx-font-weight: 500;" text="Reports">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -104,7 +112,7 @@
                         <Font name="Poppins SemiBold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="372.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-font-size: 17; -fx-font-weight: 500; -fx-background-color: white;" text="Notifications">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="337.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#switchToNotification" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-font-size: 17; -fx-font-weight: 500; -fx-background-color: #ffffff;" text="Notifications">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -121,9 +129,78 @@
                         <Image url="@../../../images/profile.png" />
                      </image>
                   </ImageView>
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="201.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#switchToDashboard" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-background-color: #ffffff; -fx-font-size: 17; -fx-font-weight: 500;" text="Dashboard">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="19.0" layoutX="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/dahboardIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </Pane>
          </children>
       </VBox>
+      <ScrollPane layoutX="257.0" layoutY="60.0" prefHeight="344.0" prefWidth="1020.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="346.0" prefWidth="1019.0">
+               <children>
+                  <TableView layoutX="7.0" layoutY="22.0" prefHeight="323.0" prefWidth="1020.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="C1" />
+                        <TableColumn prefWidth="75.0" text="C2" />
+                     </columns>
+                  </TableView>
+                  <Text layoutX="462.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Table">
+                     <font>
+                        <Font name="Poppins SemiBold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <ScrollPane layoutX="798.0" layoutY="405.0" prefHeight="315.0" prefWidth="479.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="313.0" prefWidth="480.0">
+               <children>
+                  <TableView layoutY="29.0" prefHeight="270.0" prefWidth="462.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+                  <Text layoutX="190.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier Table">
+                     <font>
+                        <Font name="Poppins SemiBold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="257.0" layoutY="405.0" prefHeight="315.0" prefWidth="542.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="315.0" prefWidth="541.0">
+               <children>
+                  <TableView layoutY="28.0" prefHeight="271.0" prefWidth="526.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="C1" />
+                        <TableColumn prefWidth="75.0" text="C2" />
+                     </columns>
+                  </TableView>
+                  <Text layoutX="216.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Table">
+                     <font>
+                        <Font name="Poppins SemiBold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

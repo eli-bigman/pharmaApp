@@ -48,9 +48,9 @@
             </Pane>
          </children>
       </HBox>
-      <VBox prefHeight="720.0" prefWidth="256.0" style="-fx-background-color: ash;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="720.0" prefWidth="256.0" style="-fx-background-color: #cdd3e2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane cache="true" prefHeight="725.0" prefWidth="256.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+            <Pane cache="true" prefHeight="725.0" prefWidth="256.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
                <children>
                   <Text layoutX="89.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PharmaApp">
                      <font>
@@ -68,7 +68,7 @@
                      </font>
                   </Text>
                   <Text fill="#fed600" layoutX="103.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super Admin" />
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="201.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-background-color: white; -fx-font-size: 17; -fx-font-weight: 500;" text="Dashboard">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="201.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-background-color: #ffffff; -fx-font-size: 17; -fx-font-weight: 500;" text="Dashboard">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" layoutX="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -80,7 +80,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="247.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-font-size: 17; -fx-font-weight: 500; -fx-background-color: white;" text="Inventory">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="247.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-font-size: 17; -fx-font-weight: 500; -fx-background-color: #ffffff;" text="Inventory">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true" x="21.0">
                            <image>
@@ -92,7 +92,7 @@
                         <Font name="Poppins SemiBold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="293.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-background-color: white; -fx-font-size: 17; -fx-font-weight: 500;" text="Reports">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="293.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-background-color: #ffffff; -fx-font-size: 17; -fx-font-weight: 500;" text="Reports">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -104,7 +104,7 @@
                         <Font name="Poppins SemiBold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="372.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-font-size: 17; -fx-font-weight: 500; -fx-background-color: white;" text="Notifications">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="372.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="256.0" style="-fx-pref-width: 256; -fx-pref-height: 46; -fx-font-size: 17; -fx-font-weight: 500; -fx-background-color: #ffffff;" text="Notifications">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                            <image>
