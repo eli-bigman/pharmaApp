@@ -79,8 +79,8 @@ public class DashboardController {
             totalDrugsInStockLabel.setText(String.valueOf(totalDrugsInStock));
             totalMedicineSoldLabel.setText(String.valueOf(totalMedicineSold));
 
-//            totalNumberOfDrugs1.setText(String.valueOf(totalDrugsInStock));
-//            totalNumberOfDrugs2.setText(String.valueOf(totalDrugsInStock));
+            totalNumberOfDrugs1.setText(String.valueOf(totalDrugsInStock));
+            totalNumberOfDrugs2.setText(String.valueOf(totalDrugsInStock));
 
         } catch (SQLException e) {
             // Handle the exception
@@ -99,7 +99,7 @@ public class DashboardController {
     }
 
     private int getTotalDrugsInStock(Connection connection) throws SQLException {
-        String query = "SELECT COUNT(*) AS total_medicine_in_stock FROM drugs";
+        String query = "SELECT COUNT(*) AS total_medicine_in_stock FROM drugs WHERE purchased = 'no'";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 resultSet.next();

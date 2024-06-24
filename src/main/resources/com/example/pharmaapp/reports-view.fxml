@@ -21,7 +21,7 @@
          <children>
             <Pane prefHeight="60.0" prefWidth="1041.0" style="-fx-background-color: #2ED47A;" HBox.hgrow="ALWAYS">
                <children>
-                  <TextField layoutX="40.0" layoutY="11.0" prefHeight="38.0" prefWidth="440.0" style="-fx-background-color: #E3EBF3; -fx-border-radius: 4;">
+                  <TextField editable="false" layoutX="40.0" layoutY="11.0" prefHeight="38.0" prefWidth="440.0" style="-fx-background-color: #E3EBF3; -fx-border-radius: 4;">
                      <padding>
                         <Insets bottom="11.0" left="40.0" top="11.0" />
                      </padding>
@@ -149,8 +149,9 @@
          <columns>
             <TableColumn fx:id="purchaseIdColumn" prefWidth="150.0" text="Purchase ID" />
             <TableColumn fx:id="drugIdColumn" prefWidth="201.0" text="Drug ID" />
-            <TableColumn fx:id="priceSoldColumn" prefWidth="276.0" text="Price Sold" />
-            <TableColumn fx:id="dateTimeColumn" prefWidth="282.0" text="DataTime" />
+            <TableColumn fx:id="priceSoldColumn" prefWidth="231.0" text="Price Sold" />
+            <TableColumn fx:id="purchaseCustomerIdColumn" prefWidth="117.0" text="CustomerID" />
+            <TableColumn fx:id="dateTimeColumn" minWidth="0.0" prefWidth="293.0" text="DataTime" />
          </columns>
       </TableView>
       <Text layoutX="724.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Table">
@@ -171,12 +172,11 @@
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <TableView layoutX="254.0" layoutY="442.0" prefHeight="287.0" prefWidth="514.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="512.0">
+      <TableView fx:id="customerTable" layoutX="254.0" layoutY="442.0" prefHeight="287.0" prefWidth="514.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="512.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="176.0" text="Contact Info" />
-            <TableColumn prefWidth="140.0" text="DateTime" />
-            <TableColumn prefWidth="135.0" text="Drug ID" />
+            <TableColumn fx:id="customerIdColumn" prefWidth="38.0" text="ID" />
+            <TableColumn fx:id="customerNameColumn" prefWidth="230.0" text="Name" />
+            <TableColumn fx:id="customerContactInfoColumn" prefWidth="245.0" text="Contact Info" />
          </columns>
       </TableView>
       <Text layoutX="447.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Table">

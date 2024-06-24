@@ -55,7 +55,18 @@ public class InventoryController implements Initializable {
     private TextField descriptionField;
 
     @FXML
-    private TextField supplierField;
+    private TextField supplierNameField;
+    @FXML
+    private TextField supplierLocationField;
+    @FXML
+    private TextField supplierContactInfoField;
+
+
+
+    @FXML
+    private TextField customerNameField;
+    @FXML
+    private TextField customerPhoneNumberField;
 
     @FXML
     private JFXButton addButton;
@@ -93,7 +104,7 @@ public class InventoryController implements Initializable {
         // Database connection and data retrieval
         try (Connection conn = dbConnection.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM Drugs")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM Drugs WHERE purchased = 'no'")) {
 
             while (rs.next()) {
                int drugID = rs.getInt("drugID");
@@ -120,15 +131,22 @@ public class InventoryController implements Initializable {
         double unitPrice = Double.parseDouble(unitPriceField.getText());
         int numOfUnits = Integer.parseInt(numOfUnitsField.getText());
         String description = descriptionField.getText();
-        String supplier = supplierField.getText();
+        String supplierName = supplierNameField.getText();
+        String supplierLocation = supplierLocationField.getText();
+        String supplierContactInfo = supplierContactInfoField.getText();
 
-        addDrugToDatabase(drugName, unitPrice, numOfUnits, description, supplier);
+        addDrugToDatabase(drugName, unitPrice, numOfUnits, description, supplierName);
+        addSupplierToDatabase(supplierName,supplierContactInfo,supplierLocation);
 
         drugNameField.clear();
         unitPriceField.clear();
         numOfUnitsField.clear();
         descriptionField.clear();
-        supplierField.clear();
+        supplierNameField.clear();
+        supplierLocationField.clear();
+        supplierContactInfoField.clear();
+        supplierNameField.clear();
+
         // Refresh table view
         loadDrugData();
     }
@@ -181,45 +199,103 @@ public class InventoryController implements Initializable {
     }
 
 
+    private void addSupplierToDatabase(String supplierName, String supplierContactInfo, String supplierLocation) {
+        String sql = "INSERT INTO Suppliers (supplierName,location,contactInfo) VALUES (?, ?, ?)";
+
+        try (Connection conn = dbConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, supplierName);
+            pstmt.setString(2, supplierLocation);
+            pstmt.setString(3, supplierContactInfo);
+
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private int addCustomerToDatabase(String customerName, String customerPhoneNo) {
+        String sql = "INSERT INTO Customers (customerName, contactInfo) VALUES (?, ?)";
+        int customerID = 0;
+        try (Connection conn = dbConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, customerName);
+            pstmt.setString(2, customerPhoneNo);
+            pstmt.executeUpdate();
+
+
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    customerID = generatedKeys.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return customerID;
+    }
+
+
 
 
     //Handle purchase logic
 
     @FXML
     private void sellButtonClicked(ActionEvent event) {
+        //add drugs to purchased and create a new customer object
+        String customerName = customerNameField.getText();
+        String customerPhoneNo = customerPhoneNumberField.getText();
         Drug selectedDrug = drugsTable.getSelectionModel().getSelectedItem();
-        if (selectedDrug != null) {
-            addPurchaseToDatabase(selectedDrug.getDrugID(), selectedDrug.getUnitPrice());
-            deleteDrugFromDatabase(selectedDrug.getDrugID());
+        if (selectedDrug != null && customerName != null && customerPhoneNo != null) {
+
+            int customerID = addCustomerToDatabase(customerName, customerPhoneNo);
+
+            addPurchaseToDatabase(selectedDrug.getDrugID(), selectedDrug.getUnitPrice(), customerID);
+
+            markDrugAsSold(selectedDrug.getDrugID());
             loadDrugData();
+            customerPhoneNumberField.clear();
+            customerNameField.clear();
         }
     }
 
-    private void deleteDrugFromDatabase(int drugID) {
-        String sql = "DELETE FROM Drugs WHERE drugID = ?";
 
-        try (Connection connection = dbConnection.getConnection()) {
-            PreparedStatement deletePurchaseStatement = connection.prepareStatement("DELETE FROM purchase WHERE drugID =?");
-            deletePurchaseStatement.setInt(1, drugID);
-            deletePurchaseStatement.executeUpdate();
 
-            PreparedStatement deleteDrugStatement = connection.prepareStatement("DELETE FROM drugs WHERE drugID =?");
-            deleteDrugStatement.setInt(1, drugID);
-            deleteDrugStatement.executeUpdate();
+    private void markDrugAsSold(int drugID) {
+        String updateSql = "UPDATE Drugs SET purchased = 'yes' WHERE drugID =?";
+        String insertSql = "INSERT INTO Purchase (drugID, price_sold, date_time) SELECT drugID, unitPrice,? FROM Drugs WHERE drugID =?";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement updateStmt = connection.prepareStatement(updateSql);
+             PreparedStatement insertStmt = connection.prepareStatement(insertSql)) {
+
+            updateStmt.setInt(1, drugID);
+            updateStmt.executeUpdate();
+
+            insertStmt.setString(1, Timestamp.valueOf(LocalDateTime.now()).toString());
+            insertStmt.setInt(2, drugID);
+
+            insertStmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void addPurchaseToDatabase(int drugID, double price_sold) {
-        String sql = "INSERT INTO Purchase (drugID, price_sold, date_time) VALUES (?, ?, ?)";
+    private void addPurchaseToDatabase(int drugID, double price_sold, int customerID) {
+        String sql = "INSERT INTO Purchase (drugID, price_sold, date_time, customerID) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, drugID);
             pstmt.setDouble(2, price_sold);
-           pstmt.setString(3, Timestamp.valueOf(LocalDateTime.now()).toString());
+            pstmt.setString(3, Timestamp.valueOf(LocalDateTime.now()).toString());
+            pstmt.setInt(4, customerID);
 
             pstmt.executeUpdate();
 

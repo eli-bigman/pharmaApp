@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -127,7 +128,7 @@
             </Pane>
          </children>
       </VBox>
-      <TableView fx:id="drugsTable" layoutX="258.0" layoutY="60.0" prefHeight="407.0" prefWidth="1026.0" AnchorPane.leftAnchor="258.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="60.0">
+      <TableView fx:id="drugsTable" layoutX="258.0" layoutY="60.0" prefHeight="386.0" prefWidth="1026.0" AnchorPane.leftAnchor="258.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="60.0">
         <columns>
           <TableColumn fx:id="drugIDColumn" prefWidth="75.0" text="Drug ID" />
           <TableColumn fx:id="drugNameColumn" prefWidth="159.0" text="Drug Name" />
@@ -137,60 +138,101 @@
             <TableColumn fx:id="descriptionColumn" prefWidth="439.0" text="Description" />
         </columns>
       </TableView>
-      <JFXButton fx:id="addButton" contentDisplay="RIGHT" layoutX="1096.0" layoutY="646.0" onAction="#addButtonClicked" prefHeight="46.0" prefWidth="123.0" style="-fx-background-color: #406aff; -fx-font-family: Poppins; -fx-font-size: 14; -fx-border-color: #F0483E;" text="Add Drug">
+      <JFXButton fx:id="addButton" buttonType="RAISED" contentDisplay="RIGHT" layoutX="698.0" layoutY="671.0" onAction="#addButtonClicked" prefHeight="35.0" prefWidth="133.0" style="-fx-background-color: #406aff; -fx-font-family: Poppins; -fx-font-size: 14; -fx-background-radius: 40; -fx-border-radius: 40;" text="Add Drug">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </JFXButton>
-      <Text layoutX="288.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drug Name">
+      <Text layoutX="271.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drug Name">
          <font>
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="unitPriceField" layoutX="714.0" layoutY="544.0" prefHeight="42.0" prefWidth="156.0" />
-      <TextField fx:id="descriptionField" layoutX="714.0" layoutY="597.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="92.0" prefWidth="276.0">
+      <TextField fx:id="unitPriceField" layoutX="705.0" layoutY="502.0" prefHeight="35.0" prefWidth="133.0" />
+      <TextField fx:id="descriptionField" layoutX="690.0" layoutY="560.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="78.0" prefWidth="148.0">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font></TextField>
-      <Text layoutX="288.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier">
+      <Text layoutX="273.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier Name" wrappingWidth="77.0">
          <font>
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="drugNameField" layoutX="404.0" layoutY="497.0" prefHeight="42.0" prefWidth="156.0">
+      <TextField fx:id="drugNameField" layoutX="386.0" layoutY="456.0" prefHeight="42.0" prefWidth="156.0">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="supplierField" layoutX="404.0" layoutY="554.0" prefHeight="42.0" prefWidth="156.0">
+      <TextField fx:id="supplierNameField" layoutX="386.0" layoutY="508.0" prefHeight="42.0" prefWidth="156.0">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </TextField>
-      <Text layoutX="655.0" layoutY="570.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
+      <Text layoutX="584.0" layoutY="534.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
          <font>
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="617.0" layoutY="627.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discription">
+      <Text layoutX="581.0" layoutY="615.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discription">
          <font>
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="582.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Units">
+      <Text layoutX="582.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Units" textAlignment="JUSTIFY" wrappingWidth="80.86399841308588">
          <font>
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="numOfUnitsField" layoutX="714.0" layoutY="487.0" prefHeight="42.0" prefWidth="156.0">
+      <TextField fx:id="numOfUnitsField" layoutX="705.0" layoutY="460.0" prefHeight="33.0" prefWidth="133.0">
          <font>
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </TextField>
-      <JFXButton fx:id="sellButton" buttonType="RAISED" contentDisplay="RIGHT" layoutX="1096.0" layoutY="485.0" onAction="#sellButtonClicked" prefHeight="46.0" prefWidth="176.0" ripplerFill="#2ea138" style="-fx-background-color: #f0483e; -fx-font-family: Poppins; -fx-font-size: 16; -fx-background-radius: 30; -fx-border-radius: 30;" text="Mark As Sold">
+      <JFXButton fx:id="sellButton" buttonType="RAISED" contentDisplay="RIGHT" layoutX="1057.0" layoutY="665.0" onAction="#sellButtonClicked" prefHeight="41.0" prefWidth="156.0" ripplerFill="#2ea138" style="-fx-background-color: #f0483e; -fx-font-family: Poppins; -fx-font-size: 16; -fx-background-radius: 30; -fx-border-radius: 30;" text="Mark As Sold">
          <font>
             <Font name="Poppins Bold" size="17.0" />
          </font>
       </JFXButton>
+      <Separator layoutX="844.0" layoutY="445.0" orientation="VERTICAL" prefHeight="278.0" prefWidth="35.0" />
+      <TextField fx:id="customerNameField" layoutX="1012.0" layoutY="487.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="245.0">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </TextField>
+      <Text layoutX="879.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name">
+         <font>
+            <Font name="Poppins SemiBold" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="885.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number">
+         <font>
+            <Font name="Poppins SemiBold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="customerPhoneNumberField" layoutX="1012.0" layoutY="570.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="245.0">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </TextField>
+      <Text layoutX="271.0" layoutY="629.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier Location" wrappingWidth="99.60999298095703">
+         <font>
+            <Font name="Poppins SemiBold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="supplierLocationField" layoutX="386.0" layoutY="614.0" prefHeight="42.0" prefWidth="156.0">
+         <font>
+            <Font name="Poppins Regular" size="15.0" />
+         </font>
+      </TextField>
+      <Text layoutX="271.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier Phone No" textAlignment="JUSTIFY" wrappingWidth="99.60999298095703">
+         <font>
+            <Font name="Poppins SemiBold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="supplierContactInfoField" layoutX="386.0" layoutY="563.0" prefHeight="42.0" prefWidth="156.0">
+         <font>
+            <Font name="Poppins Regular" size="15.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package com.example.pharmaapp;
 
 import com.example.pharmaapp.database.sql.dbConnection;
+import com.example.pharmaapp.entities.Customer;
 import com.example.pharmaapp.entities.Purchase;
 import com.example.pharmaapp.entities.Supplier;
 import com.jfoenix.controls.JFXButton;
@@ -13,8 +14,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -38,6 +41,9 @@ public class ReportController implements Initializable {
     private TableColumn<Purchase, Integer> drugIdColumn;
     @FXML
     private TableColumn<Purchase, Double> priceSoldColumn;
+
+    @FXML
+    private TableColumn<Purchase, Double> purchaseCustomerIdColumn;
     @FXML
     private TableColumn<Purchase, String> dateTimeColumn;
 
@@ -57,9 +63,27 @@ public class ReportController implements Initializable {
     @FXML
     private TableColumn<Supplier, String> supplierContactInfoColumn;
 
+
+    @FXML
+    private TableView<Customer> customerTable;
+    @FXML
+    private TableColumn<Customer, String> customerIdColumn;
+    @FXML
+    private TableColumn<Customer, String> customerNameColumn;
+    @FXML
+    private TableColumn<Customer, String> customerContactInfoColumn;
+
+    @FXML
+    private TextField customrerNameField;
+    @FXML
+    private TextField contactInfoField;
+
+
     private ObservableList<Supplier> supplierList = FXCollections.observableArrayList();
 
     private ObservableList<Purchase> purchaseList = FXCollections.observableArrayList();
+
+    private ObservableList<Customer> customerList = FXCollections.observableArrayList();;
 
 
     @Override
@@ -68,9 +92,8 @@ public class ReportController implements Initializable {
         drugIdColumn.setCellValueFactory(new PropertyValueFactory<>("drugID"));
         priceSoldColumn.setCellValueFactory(new PropertyValueFactory<>("priceSold"));
         dateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
-
+        purchaseCustomerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         purchaseTable.setItems(purchaseList);
-
         loadPurchases();
 
 
@@ -78,17 +101,20 @@ public class ReportController implements Initializable {
         supplierNameColumn.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
         supplierLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         supplierContactInfoColumn.setCellValueFactory(new PropertyValueFactory<>("contactInfo"));
-
-        // Set the table items
         supplierTable.setItems(supplierList);
-
         loadSuppliers();
+
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        customerContactInfoColumn.setCellValueFactory(new PropertyValueFactory<>("contactInfo"));
+        customerTable.setItems(customerList);
+        loadCustomers();
     }
 
-    public void setSupplierList(ObservableList<Supplier> supplierList) {
-        this.supplierList = supplierList;
-        supplierTable.setItems(supplierList);
-    }
+//    public void setSupplierList(ObservableList<Supplier> supplierList) {
+//        this.supplierList = supplierList;
+//        supplierTable.setItems(supplierList);
+//    }
 
     private void loadSuppliers() {
         try (Connection conn = dbConnection.getConnection();
@@ -117,8 +143,10 @@ public class ReportController implements Initializable {
 
             while (resultSet.next()) {
                 Purchase purchase = new Purchase(
+                        resultSet.getInt("purchase_id"),
                         resultSet.getInt("drugID"),
-                        resultSet.getDouble("price_sold")
+                        resultSet.getDouble("price_sold"),
+                        resultSet.getInt("customerID")
                 );
 
                 purchaseList.add(purchase);
@@ -129,7 +157,24 @@ public class ReportController implements Initializable {
 
     }
 
+    private void loadCustomers() {
+        try (Connection conn = dbConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Customers")) {
+            ResultSet resultSet = pstmt.executeQuery();
 
+            while (resultSet.next()) {
+                Customer customer = new Customer(
+                        resultSet.getInt("id"),
+                        resultSet.getString("customerName"),
+                        resultSet.getString("contactInfo")
+                );
+
+                customerList.add(customer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @FXML

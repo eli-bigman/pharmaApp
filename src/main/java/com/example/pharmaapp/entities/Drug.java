@@ -8,6 +8,8 @@ public class Drug {
     private int numOfUnits;
     private String description;
     private String supplier;
+    private boolean purchased;
+
 
 
     public Drug(int drugID, String drugName, double unitPrice, int numOfUnits, String description, String supplier) {
@@ -17,6 +19,7 @@ public class Drug {
         this.numOfUnits = numOfUnits;
         this.description = description;
         this.supplier = supplier;
+        this.purchased = false;
     }
 
 
@@ -61,4 +64,12 @@ public class Drug {
     public void setSupplier(String supplier) {this.supplier = supplier;}
 
     public String getSupplier() { return supplier; }
+
+    public boolean isPurchased() {
+        return purchased;
+    }
+
+    public void setPurchased(boolean purchased) {
+        this.purchased = purchased;
+    }
 }

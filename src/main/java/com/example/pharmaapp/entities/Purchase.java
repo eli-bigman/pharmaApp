@@ -5,16 +5,18 @@ import java.time.LocalDateTime;
 
 // Purchase.java
 public class Purchase {
-   private int purchaseID;
+    private int purchaseID;
     private int drugID;
     private double priceSold;
     private final String dateTime;
+    private int customerID;
 
-    public Purchase(int drugID, double priceSold) {
+    public Purchase(int purchaseID, int drugID, double priceSold, int customerID) {
         this.purchaseID = purchaseID;
         this.drugID = drugID;
         this.priceSold = priceSold;
-        this.dateTime = Timestamp.valueOf(LocalDateTime.now()).toString();;
+        this.dateTime = Timestamp.valueOf(LocalDateTime.now()).toString();
+        this.customerID = customerID;
     }
 
 
@@ -25,10 +27,14 @@ public class Purchase {
         return purchaseID;
     }
 
-
-    public void setPurchaseID(int purchaseID) {
-        this.purchaseID = purchaseID;
+    public int getCustomerID() {
+        return customerID;
     }
+
+
+//    public void setPurchaseID(int purchaseID) {
+//        this.purchaseID = purchaseID;
+//    }
 
     public int getDrugID() {
         return drugID;

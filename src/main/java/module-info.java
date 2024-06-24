@@ -21,8 +21,8 @@ module com.example.pharmaapp {
 //  opens com.example.pharmaapp.controllers to javafx.fxml;
     exports com.example.pharmaapp.database.sql;
     opens com.example.pharmaapp.database.sql to javafx.fxml;
-    exports com.example.pharmaapp.database.dataStructures;
-    opens com.example.pharmaapp.database.dataStructures to javafx.fxml;
+//    exports com.example.pharmaapp.database.dataStructures;
+//    opens com.example.pharmaapp.database.dataStructures to javafx.fxml;
     exports com.example.pharmaapp.entities;
     opens com.example.pharmaapp.entities to javafx.fxml;
 }
