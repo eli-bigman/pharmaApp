@@ -1,16 +1,30 @@
-package com.example.pharmaapp.database.sql;
+package com.example.pharmaapp.entities;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 // Purchase.java
 public class Purchase {
-    private int purchaseID;
+   private int purchaseID;
     private int drugID;
     private double priceSold;
-    private String dateTime;
+    private final String dateTime;
+
+    public Purchase(int drugID, double priceSold) {
+        this.purchaseID = purchaseID;
+        this.drugID = drugID;
+        this.priceSold = priceSold;
+        this.dateTime = Timestamp.valueOf(LocalDateTime.now()).toString();;
+    }
+
+
+
 
     // getters and setters
     public int getPurchaseID() {
         return purchaseID;
     }
+
 
     public void setPurchaseID(int purchaseID) {
         this.purchaseID = purchaseID;
@@ -36,7 +50,7 @@ public class Purchase {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
+//    public void setDateTime(String dateTime) {
+//        this.dateTime = dateTime;
+//    }
 }

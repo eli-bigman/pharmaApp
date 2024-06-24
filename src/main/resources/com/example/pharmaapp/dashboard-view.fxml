@@ -201,7 +201,7 @@
                                     <Image url="@../../../images/payments-black-24-dp-1.png" />
                                  </image>
                               </ImageView>
-                              <Text layoutX="38.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GHC 8,999.00">
+                              <Text fx:id="revenueLabel" layoutX="53.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GHC 89.00" textOrigin="CENTER">
                                  <font>
                                     <Font name="Poppins SemiBold" size="20.0" />
                                  </font>
@@ -235,7 +235,7 @@
                                     <Image url="@../../../images/medical-services-black-24-dp-2.png" />
                                  </image>
                               </ImageView>
-                              <Text layoutX="88.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="298">
+                              <Text fx:id="totalDrugsInStockLabel" layoutX="97.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="17" textOrigin="CENTER">
                                  <font>
                                     <Font name="Poppins SemiBold" size="20.0" />
                                  </font>
@@ -307,7 +307,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Rectangle arcHeight="1.0" arcWidth="1.0" fill="WHITE" height="50.0" layoutY="-1.0" stroke="#1d242e4c" strokeType="OUTSIDE" width="454.0" />
-                  <Label layoutX="26.0" layoutY="69.0" text="298">
+                  <Label fx:id="totalNumberOfDrugs1" layoutX="26.0" layoutY="69.0" text="298">
                      <font>
                         <Font name="Poppins SemiBold" size="21.0" />
                      </font>
@@ -351,7 +351,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Rectangle arcHeight="1.0" arcWidth="1.0" fill="WHITE" height="50.0" layoutY="-1.0" stroke="#1d242e4c" strokeType="OUTSIDE" width="454.0" />
-                  <Label layoutX="26.0" layoutY="69.0" text="298">
+                  <Label layoutX="26.0" layoutY="69.0" text="50">
                      <font>
                         <Font name="Poppins SemiBold" size="21.0" />
                      </font>
@@ -395,7 +395,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Rectangle arcHeight="1.0" arcWidth="1.0" fill="WHITE" height="50.0" layoutY="-1.0" stroke="#1d242e4c" strokeType="OUTSIDE" width="454.0" />
-                  <Label layoutX="26.0" layoutY="69.0" text="298">
+                  <Label fx:id="totalMedicineSoldLabel" layoutX="26.0" layoutY="69.0" text="298">
                      <font>
                         <Font name="Poppins SemiBold" size="21.0" />
                      </font>
@@ -439,7 +439,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Rectangle arcHeight="1.0" arcWidth="1.0" fill="WHITE" height="50.0" layoutY="-1.0" stroke="#1d242e4c" strokeType="OUTSIDE" width="454.0" />
-                  <Label layoutX="26.0" layoutY="69.0" text="298">
+                  <Label fx:id="totalNumberOfDrugs2" layoutX="26.0" layoutY="69.0" text="29">
                      <font>
                         <Font name="Poppins SemiBold" size="21.0" />
                      </font>

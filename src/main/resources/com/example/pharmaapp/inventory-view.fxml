@@ -137,7 +137,7 @@
             <TableColumn fx:id="descriptionColumn" prefWidth="439.0" text="Description" />
         </columns>
       </TableView>
-      <JFXButton fx:id="addButton" contentDisplay="RIGHT" layoutX="1096.0" layoutY="646.0" onAction="#addButtonClicked" prefHeight="46.0" prefWidth="123.0" style="-fx-background-color: F0483E; -fx-font-family: Poppins; -fx-font-size: 14; -fx-border-color: F0483E;" text="Add Drug">
+      <JFXButton fx:id="addButton" contentDisplay="RIGHT" layoutX="1096.0" layoutY="646.0" onAction="#addButtonClicked" prefHeight="46.0" prefWidth="123.0" style="-fx-background-color: #406aff; -fx-font-family: Poppins; -fx-font-size: 14; -fx-border-color: #F0483E;" text="Add Drug">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
@@ -148,7 +148,10 @@
          </font>
       </Text>
       <TextField fx:id="unitPriceField" layoutX="714.0" layoutY="544.0" prefHeight="42.0" prefWidth="156.0" />
-      <TextField fx:id="descriptionField" layoutX="714.0" layoutY="597.0" prefHeight="92.0" prefWidth="276.0" />
+      <TextField fx:id="descriptionField" layoutX="714.0" layoutY="597.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="92.0" prefWidth="276.0">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font></TextField>
       <Text layoutX="288.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier">
          <font>
             <Font name="Poppins SemiBold" size="14.0" />
@@ -184,5 +187,10 @@
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </TextField>
+      <JFXButton fx:id="sellButton" buttonType="RAISED" contentDisplay="RIGHT" layoutX="1096.0" layoutY="485.0" onAction="#sellButtonClicked" prefHeight="46.0" prefWidth="176.0" ripplerFill="#2ea138" style="-fx-background-color: #f0483e; -fx-font-family: Poppins; -fx-font-size: 16; -fx-background-radius: 30; -fx-border-radius: 30;" text="Mark As Sold">
+         <font>
+            <Font name="Poppins Bold" size="17.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

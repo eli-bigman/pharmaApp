@@ -1,4 +1,4 @@
-package com.example.pharmaapp.database.sql;
+package com.example.pharmaapp.entities;
 
 // DrugSupplier.java
 public class DrugSupplier {

@@ -1,7 +1,7 @@
 package com.example.pharmaapp;
 
 
-import com.example.pharmaapp.database.dataStructures.Drug;
+import com.example.pharmaapp.entities.Drug;
 import com.example.pharmaapp.database.sql.dbConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -58,6 +59,10 @@ public class InventoryController implements Initializable {
 
     @FXML
     private JFXButton addButton;
+
+    @FXML
+    private JFXButton sellButton;
+
 
     @FXML
     private JFXButton searchButton;
@@ -119,9 +124,16 @@ public class InventoryController implements Initializable {
 
         addDrugToDatabase(drugName, unitPrice, numOfUnits, description, supplier);
 
+        drugNameField.clear();
+        unitPriceField.clear();
+        numOfUnitsField.clear();
+        descriptionField.clear();
+        supplierField.clear();
         // Refresh table view
         loadDrugData();
     }
+
+
 
 
     @FXML
@@ -142,8 +154,8 @@ public class InventoryController implements Initializable {
                     filteredList.add(drug);
                 }
             }
-            drugsTable.getItems().clear(); // Clear the table items
-            drugsTable.getItems().addAll(filteredList); // Add the filtered items to the table
+            drugsTable.getItems().clear();
+            drugsTable.getItems().addAll(filteredList);
             //drugsTable.setItems(filteredList);
         }
     }
@@ -168,6 +180,53 @@ public class InventoryController implements Initializable {
         }
     }
 
+
+
+
+    //Handle purchase logic
+
+    @FXML
+    private void sellButtonClicked(ActionEvent event) {
+        Drug selectedDrug = drugsTable.getSelectionModel().getSelectedItem();
+        if (selectedDrug != null) {
+            addPurchaseToDatabase(selectedDrug.getDrugID(), selectedDrug.getUnitPrice());
+            deleteDrugFromDatabase(selectedDrug.getDrugID());
+            loadDrugData();
+        }
+    }
+
+    private void deleteDrugFromDatabase(int drugID) {
+        String sql = "DELETE FROM Drugs WHERE drugID = ?";
+
+        try (Connection connection = dbConnection.getConnection()) {
+            PreparedStatement deletePurchaseStatement = connection.prepareStatement("DELETE FROM purchase WHERE drugID =?");
+            deletePurchaseStatement.setInt(1, drugID);
+            deletePurchaseStatement.executeUpdate();
+
+            PreparedStatement deleteDrugStatement = connection.prepareStatement("DELETE FROM drugs WHERE drugID =?");
+            deleteDrugStatement.setInt(1, drugID);
+            deleteDrugStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void addPurchaseToDatabase(int drugID, double price_sold) {
+        String sql = "INSERT INTO Purchase (drugID, price_sold, date_time) VALUES (?, ?, ?)";
+
+        try (Connection conn = dbConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, drugID);
+            pstmt.setDouble(2, price_sold);
+           pstmt.setString(3, Timestamp.valueOf(LocalDateTime.now()).toString());
+
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // Switch Screens
     @FXML

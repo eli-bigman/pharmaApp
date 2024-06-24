@@ -1,7 +1,5 @@
-package com.example.pharmaapp.database.dataStructures;
+package com.example.pharmaapp.entities;
 
-//import javafx.beans.property.BooleanProperty;
-//import javafx.beans.property.SimpleBooleanProperty;
 
 public class Drug {
     private final int drugID;
@@ -22,19 +20,7 @@ public class Drug {
     }
 
 
-//    private BooleanProperty purchase = new SimpleBooleanProperty(false);
-//
-//    public BooleanProperty purchaseProperty() {
-//        return purchase;
-//    }
-//
-//    public boolean isPurchase() {
-//        return purchase.get();
-//    }
-//
-//    public void setPurchase(boolean purchase) {
-//        this.purchase.set(purchase);
-//    }
+
 
     public int getDrugID() {
         return drugID;

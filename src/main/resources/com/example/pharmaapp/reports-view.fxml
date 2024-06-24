@@ -2,7 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -145,62 +145,45 @@
             </Pane>
          </children>
       </VBox>
-      <ScrollPane layoutX="257.0" layoutY="60.0" prefHeight="344.0" prefWidth="1020.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="346.0" prefWidth="1019.0">
-               <children>
-                  <TableView layoutX="7.0" layoutY="22.0" prefHeight="323.0" prefWidth="1020.0">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
-                  </TableView>
-                  <Text layoutX="462.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Table">
-                     <font>
-                        <Font name="Poppins SemiBold" size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
-      <ScrollPane layoutX="798.0" layoutY="405.0" prefHeight="315.0" prefWidth="479.0">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="313.0" prefWidth="480.0">
-               <children>
-                  <TableView layoutY="29.0" prefHeight="270.0" prefWidth="462.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
-                  <Text layoutX="190.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier Table">
-                     <font>
-                        <Font name="Poppins SemiBold" size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-         </content>
-      </ScrollPane>
-      <ScrollPane layoutX="257.0" layoutY="405.0" prefHeight="315.0" prefWidth="542.0">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="315.0" prefWidth="541.0">
-               <children>
-                  <TableView layoutY="28.0" prefHeight="271.0" prefWidth="526.0">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
-                  </TableView>
-                  <Text layoutX="216.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Table">
-                     <font>
-                        <Font name="Poppins SemiBold" size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-         </content>
-      </ScrollPane>
+      <TableView fx:id="purchaseTable" layoutX="257.0" layoutY="95.0" prefHeight="310.0" prefWidth="1020.0" AnchorPane.leftAnchor="257.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="95.0">
+         <columns>
+            <TableColumn fx:id="purchaseIdColumn" prefWidth="150.0" text="Purchase ID" />
+            <TableColumn fx:id="drugIdColumn" prefWidth="201.0" text="Drug ID" />
+            <TableColumn fx:id="priceSoldColumn" prefWidth="276.0" text="Price Sold" />
+            <TableColumn fx:id="dateTimeColumn" prefWidth="282.0" text="DataTime" />
+         </columns>
+      </TableView>
+      <Text layoutX="724.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Table">
+         <font>
+            <Font name="Poppins SemiBold" size="14.0" />
+         </font>
+      </Text>
+      <TableView fx:id="supplierTable" layoutX="787.0" layoutY="441.0" prefHeight="287.0" prefWidth="494.0" AnchorPane.leftAnchor="787.0" AnchorPane.rightAnchor="-1.0">
+        <columns>
+          <TableColumn fx:id="supplierIDColumn" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="supplierNameColumn" prefWidth="128.0" text="Name" />
+            <TableColumn fx:id="supplierContactInfoColumn" prefWidth="163.0" text="Contact Info" />
+            <TableColumn fx:id="supplierLocationColumn" prefWidth="133.0" text="Location" />
+        </columns>
+      </TableView>
+      <Text layoutX="979.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suppliers Table">
+         <font>
+            <Font name="Poppins SemiBold" size="14.0" />
+         </font>
+      </Text>
+      <TableView layoutX="254.0" layoutY="442.0" prefHeight="287.0" prefWidth="514.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="512.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="Name" />
+            <TableColumn prefWidth="176.0" text="Contact Info" />
+            <TableColumn prefWidth="140.0" text="DateTime" />
+            <TableColumn prefWidth="135.0" text="Drug ID" />
+         </columns>
+      </TableView>
+      <Text layoutX="447.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Table">
+         <font>
+            <Font name="Poppins SemiBold" size="14.0" />
+         </font>
+      </Text>
+      <Separator layoutX="776.0" layoutY="450.0" orientation="VERTICAL" prefHeight="257.0" prefWidth="6.0" AnchorPane.bottomAnchor="22.0" AnchorPane.topAnchor="450.0" />
    </children>
 </AnchorPane>

@@ -1,4 +1,4 @@
-package com.example.pharmaapp.database.sql;
+package com.example.pharmaapp.entities;
 
 // Supplier.java
 public class Supplier {
@@ -6,6 +6,13 @@ public class Supplier {
     private String supplierName;
     private String location;
     private String contactInfo;
+
+    public Supplier(int supplierID, String supplierName, String location, String contactInfo) {
+        this.supplierID = supplierID;
+        this.supplierName = supplierName;
+        this.location = location;
+        this.contactInfo = contactInfo;
+    }
 
     // getters and setters
     public int getSupplierID() {
