@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -148,10 +149,9 @@
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="unitPriceField" layoutX="705.0" layoutY="502.0" prefHeight="35.0" prefWidth="133.0" />
-      <TextField fx:id="descriptionField" layoutX="690.0" layoutY="560.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="78.0" prefWidth="148.0">
+      <TextField fx:id="unitPriceField" layoutX="705.0" layoutY="502.0" prefHeight="35.0" prefWidth="133.0" promptText="unit cost of drug">
          <font>
-            <Font name="Poppins Regular" size="14.0" />
+            <Font name="Poppins Regular" size="13.0" />
          </font></TextField>
       <Text layoutX="273.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier Name" wrappingWidth="77.0">
          <font>
@@ -183,9 +183,9 @@
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="numOfUnitsField" layoutX="705.0" layoutY="460.0" prefHeight="33.0" prefWidth="133.0">
+      <TextField fx:id="numOfUnitsField" layoutX="705.0" layoutY="460.0" prefHeight="33.0" prefWidth="133.0" promptText="number supplied">
          <font>
-            <Font name="Poppins Regular" size="15.0" />
+            <Font name="Poppins Regular" size="13.0" />
          </font>
       </TextField>
       <JFXButton fx:id="sellButton" buttonType="RAISED" contentDisplay="RIGHT" layoutX="1057.0" layoutY="665.0" onAction="#sellButtonClicked" prefHeight="41.0" prefWidth="156.0" ripplerFill="#2ea138" style="-fx-background-color: #f0483e; -fx-font-family: Poppins; -fx-font-size: 16; -fx-background-radius: 30; -fx-border-radius: 30;" text="Mark As Sold">
@@ -234,5 +234,10 @@
             <Font name="Poppins Regular" size="15.0" />
          </font>
       </TextField>
+      <TextArea fx:id="descriptionField" layoutX="664.0" layoutY="566.0" prefHeight="92.0" prefWidth="174.0" promptText="enter drug description" wrapText="true">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </TextArea>
    </children>
 </AnchorPane>

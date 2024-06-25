@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 
@@ -21,9 +22,6 @@ import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,7 +50,7 @@ public class InventoryController implements Initializable {
     @FXML
     private TextField numOfUnitsField;
     @FXML
-    private TextField descriptionField;
+    private TextArea descriptionField;
 
     @FXML
     private TextField supplierNameField;
@@ -84,6 +82,9 @@ public class InventoryController implements Initializable {
 
     private ObservableList<Drug> drugList;
 
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize columns
@@ -99,30 +100,30 @@ public class InventoryController implements Initializable {
     }
 
     private void loadDrugData() {
-        drugList = FXCollections.observableArrayList();
+            drugList = FXCollections.observableArrayList();
 
-        // Database connection and data retrieval
-        try (Connection conn = dbConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM Drugs WHERE purchased = 'no'")) {
+            // Database connection and data retrieval
+            try (Connection conn = dbConnection.getConnection();
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery("SELECT * FROM Drugs WHERE purchased = 'no'")) {
 
-            while (rs.next()) {
-               int drugID = rs.getInt("drugID");
-                String drugName = rs.getString("drugName");
-                double unitPrice = rs.getDouble("unitPrice");
-                int numOfUnits = rs.getInt("numOfUnits");
-                String description = rs.getString("description");
-                String supplier = rs.getString("supplier");
+                while (rs.next()) {
+                   int drugID = rs.getInt("drugID");
+                    String drugName = rs.getString("drugName");
+                    double unitPrice = rs.getDouble("unitPrice");
+                    int numOfUnits = rs.getInt("numOfUnits");
+                    String description = rs.getString("description");
+                    String supplier = rs.getString("supplier");
 
-                drugList.add(new Drug(drugID, drugName, unitPrice, numOfUnits, description, supplier));
+                    drugList.add(new Drug(drugID, drugName, unitPrice, numOfUnits, description, supplier));
 
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        drugsTable.setItems(drugList);
+            drugsTable.setItems(drugList);
     }
 
     @FXML
