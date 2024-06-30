@@ -43,6 +43,8 @@ public class InventoryController implements Initializable {
     @FXML
     private TableColumn<Drug, String> descriptionColumn;
 
+    private ObservableList<Drug> drugList;
+
     @FXML
     private TextField drugNameField;
     @FXML
@@ -65,6 +67,8 @@ public class InventoryController implements Initializable {
     private TextField customerNameField;
     @FXML
     private TextField customerPhoneNumberField;
+    @FXML
+    private TextField quantityBoughtField;
 
     @FXML
     private JFXButton addButton;
@@ -80,7 +84,7 @@ public class InventoryController implements Initializable {
     private TextField searchField;
 
 
-    private ObservableList<Drug> drugList;
+
 
 
 
@@ -105,7 +109,7 @@ public class InventoryController implements Initializable {
             // Database connection and data retrieval
             try (Connection conn = dbConnection.getConnection();
                  Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery("SELECT * FROM Drugs WHERE purchased = 'no'")) {
+                 ResultSet rs = stmt.executeQuery("SELECT * FROM Drugs WHERE available = 'yes'")) {
 
                 while (rs.next()) {
                    int drugID = rs.getInt("drugID");
@@ -222,7 +226,7 @@ public class InventoryController implements Initializable {
         String sql = "INSERT INTO Customers (customerName, contactInfo) VALUES (?, ?)";
         int customerID = 0;
         try (Connection conn = dbConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, customerName);
             pstmt.setString(2, customerPhoneNo);
@@ -251,37 +255,65 @@ public class InventoryController implements Initializable {
         //add drugs to purchased and create a new customer object
         String customerName = customerNameField.getText();
         String customerPhoneNo = customerPhoneNumberField.getText();
+        int quantityBought = Integer.parseInt(quantityBoughtField.getText());
         Drug selectedDrug = drugsTable.getSelectionModel().getSelectedItem();
-        if (selectedDrug != null && customerName != null && customerPhoneNo != null) {
+        if (selectedDrug != null && customerName != null && customerPhoneNo != null && quantityBought != 0) {
 
             int customerID = addCustomerToDatabase(customerName, customerPhoneNo);
 
             addPurchaseToDatabase(selectedDrug.getDrugID(), selectedDrug.getUnitPrice(), customerID);
 
-            markDrugAsSold(selectedDrug.getDrugID());
+            processDrugSale(selectedDrug.getDrugID(), quantityBought);
             loadDrugData();
             customerPhoneNumberField.clear();
             customerNameField.clear();
+            quantityBoughtField.clear();
         }
     }
 
 
 
-    private void markDrugAsSold(int drugID) {
-        String updateSql = "UPDATE Drugs SET purchased = 'yes' WHERE drugID =?";
+//    private void markDrugAsSold(int drugID) {
+//        String updateSql = "UPDATE Drugs SET purchased = 'yes' WHERE drugID =?";
+//        String insertSql = "INSERT INTO Purchase (drugID, price_sold, date_time) SELECT drugID, unitPrice,? FROM Drugs WHERE drugID =?";
+//
+//        try (Connection connection = dbConnection.getConnection();
+//             PreparedStatement updateStmt = connection.prepareStatement(updateSql);
+//             PreparedStatement insertStmt = connection.prepareStatement(insertSql)) {
+//
+//            updateStmt.setInt(1, drugID);
+//            updateStmt.executeUpdate();
+//
+//            insertStmt.setString(1, Timestamp.valueOf(LocalDateTime.now()).toString());
+//            insertStmt.setInt(2, drugID);
+//
+//            insertStmt.executeUpdate();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
+    private void processDrugSale(int drugID, int quantityBought) {
+        String updateSql = "UPDATE Drugs SET numOfUnits = numOfUnits - ?, available = CASE WHEN numOfUnits = 0 THEN 'yes' ELSE available END WHERE drugID =?";
+        String querySql = "SELECT numOfUnits FROM Drugs WHERE drugID =?";
         String insertSql = "INSERT INTO Purchase (drugID, price_sold, date_time) SELECT drugID, unitPrice,? FROM Drugs WHERE drugID =?";
 
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement updateStmt = connection.prepareStatement(updateSql);
+             PreparedStatement queryStmt = connection.prepareStatement(querySql);
              PreparedStatement insertStmt = connection.prepareStatement(insertSql)) {
 
-            updateStmt.setInt(1, drugID);
+            updateStmt.setInt(1, quantityBought);
+            updateStmt.setInt(2, drugID);
             updateStmt.executeUpdate();
 
-            insertStmt.setString(1, Timestamp.valueOf(LocalDateTime.now()).toString());
-            insertStmt.setInt(2, drugID);
-
-            insertStmt.executeUpdate();
+            queryStmt.setInt(1, drugID);
+            ResultSet resultSet = queryStmt.executeQuery();
+            if (resultSet.next() && resultSet.getInt("numOfUnits") == 0) {
+                insertStmt.setString(1, Timestamp.valueOf(LocalDateTime.now()).toString());
+                insertStmt.setInt(2, drugID);
+                insertStmt.executeUpdate();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

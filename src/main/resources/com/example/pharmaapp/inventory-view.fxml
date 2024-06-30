@@ -194,22 +194,22 @@
          </font>
       </JFXButton>
       <Separator layoutX="844.0" layoutY="445.0" orientation="VERTICAL" prefHeight="278.0" prefWidth="35.0" />
-      <TextField fx:id="customerNameField" layoutX="1012.0" layoutY="487.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="245.0">
+      <TextField fx:id="customerNameField" layoutX="1012.0" layoutY="481.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="245.0">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </TextField>
-      <Text layoutX="879.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name">
+      <Text layoutX="879.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name">
          <font>
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="885.0" layoutY="596.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number">
+      <Text layoutX="885.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
          <font>
             <Font name="Poppins SemiBold" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="customerPhoneNumberField" layoutX="1012.0" layoutY="570.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="245.0">
+      <TextField fx:id="quantityBoughtField" layoutX="1134.0" layoutY="540.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="123.0">
          <font>
             <Font name="Poppins Regular" size="14.0" />
          </font>
@@ -239,5 +239,15 @@
             <Font name="Poppins Regular" size="14.0" />
          </font>
       </TextArea>
+      <Text layoutX="885.0" layoutY="625.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number">
+         <font>
+            <Font name="Poppins SemiBold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="customerPhoneNumberField" layoutX="1012.0" layoutY="599.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="245.0">
+         <font>
+            <Font name="Poppins Regular" size="14.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

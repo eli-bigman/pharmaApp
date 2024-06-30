@@ -99,7 +99,7 @@ public class DashboardController {
     }
 
     private int getTotalDrugsInStock(Connection connection) throws SQLException {
-        String query = "SELECT COUNT(*) AS total_medicine_in_stock FROM drugs WHERE purchased = 'no'";
+        String query = "SELECT COUNT(*) AS total_medicine_in_stock FROM drugs WHERE available = 'yes'";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 resultSet.next();
