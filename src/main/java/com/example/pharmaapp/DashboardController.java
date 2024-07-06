@@ -73,8 +73,6 @@ public class DashboardController {
             int totalDrugsInStock = getTotalDrugsInStock(connection);
             int totalMedicineSold = getTotalMedicineSold(connection);
 
-
-
             revenueLabel.setText("GHC " + String.format("%.2f", revenue));
             totalDrugsInStockLabel.setText(String.valueOf(totalDrugsInStock));
             totalMedicineSoldLabel.setText(String.valueOf(totalMedicineSold));
@@ -149,8 +147,8 @@ public class DashboardController {
     }
 
 
-    public void switchToNotification(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/pharmaapp/notification-view.fxml")));
+    public void switchToSales(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/pharmaapp/sales-view.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

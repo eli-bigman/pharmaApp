@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -53,6 +55,13 @@ public class InventoryController implements Initializable {
     private TextField numOfUnitsField;
     @FXML
     private TextArea descriptionField;
+
+    @FXML
+    private Label errorLabel;
+
+    @FXML
+    private Label sellErrorLabel;
+
 
     @FXML
     private TextField supplierNameField;
@@ -121,6 +130,7 @@ public class InventoryController implements Initializable {
 
                     drugList.add(new Drug(drugID, drugName, unitPrice, numOfUnits, description, supplier));
 
+
                 }
 
             } catch (Exception e) {
@@ -130,18 +140,54 @@ public class InventoryController implements Initializable {
             drugsTable.setItems(drugList);
     }
 
+//    @FXML
+//    private void addButtonClicked(ActionEvent event) {
+//        String drugName = drugNameField.getText();
+//        double unitPrice = Double.parseDouble(unitPriceField.getText());
+//        int numOfUnits = Integer.parseInt(numOfUnitsField.getText());
+//        String description = descriptionField.getText();
+//        String supplierName = supplierNameField.getText();
+//        String supplierLocation = supplierLocationField.getText();
+//        String supplierContactInfo = supplierContactInfoField.getText();
+//
+//        addDrugToDatabase(drugName, unitPrice, numOfUnits, description, supplierName);
+//        addSupplierToDatabase(supplierName,supplierContactInfo,supplierLocation);
+//
+//        drugNameField.clear();
+//        unitPriceField.clear();
+//        numOfUnitsField.clear();
+//        descriptionField.clear();
+//        supplierNameField.clear();
+//        supplierLocationField.clear();
+//        supplierContactInfoField.clear();
+//        supplierNameField.clear();
+//
+//        // Refresh table view
+//        loadDrugData();
+//    }
+
+
     @FXML
     private void addButtonClicked(ActionEvent event) {
         String drugName = drugNameField.getText();
-        double unitPrice = Double.parseDouble(unitPriceField.getText());
-        int numOfUnits = Integer.parseInt(numOfUnitsField.getText());
+        String unitPriceStr = unitPriceField.getText();
+        String numOfUnitsStr = numOfUnitsField.getText();
         String description = descriptionField.getText();
         String supplierName = supplierNameField.getText();
         String supplierLocation = supplierLocationField.getText();
         String supplierContactInfo = supplierContactInfoField.getText();
 
+        if (drugName.isEmpty() || unitPriceStr.isEmpty() || numOfUnitsStr.isEmpty() || description.isEmpty() || supplierName.isEmpty() || supplierLocation.isEmpty() || supplierContactInfo.isEmpty()) {
+            errorLabel.setText("Please fill in all fields");
+            errorLabel.setVisible(true);
+            return;
+        }
+
+        double unitPrice = Double.parseDouble(unitPriceStr);
+        int numOfUnits = Integer.parseInt(numOfUnitsStr);
+
         addDrugToDatabase(drugName, unitPrice, numOfUnits, description, supplierName);
-        addSupplierToDatabase(supplierName,supplierContactInfo,supplierLocation);
+        addSupplierToDatabase(supplierName, supplierContactInfo, supplierLocation);
 
         drugNameField.clear();
         unitPriceField.clear();
@@ -150,7 +196,9 @@ public class InventoryController implements Initializable {
         supplierNameField.clear();
         supplierLocationField.clear();
         supplierContactInfoField.clear();
-        supplierNameField.clear();
+
+        errorLabel.setText("");
+        errorLabel.setVisible(false);
 
         // Refresh table view
         loadDrugData();
@@ -182,6 +230,28 @@ public class InventoryController implements Initializable {
             //drugsTable.setItems(filteredList);
         }
     }
+
+
+
+//    public void writeToFile() {
+//        BufferedWriter writer = null;
+//        try {
+//            string
+//            writer = new BufferedWriter(new FileWriter("C:\\Users\\Eli\\IdeaProjects\\PharmaApp\\Sales.txt",true));
+//            writer.write(temp.toString());
+//            writer.newLine();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (writer != null) {
+//                try {
+//                    writer.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }}}
+//
+//    }
 
 
     private void addDrugToDatabase(String drugName, double unitPrice, int numOfUnits, String description, String supplier) {
@@ -255,9 +325,24 @@ public class InventoryController implements Initializable {
         //add drugs to purchased and create a new customer object
         String customerName = customerNameField.getText();
         String customerPhoneNo = customerPhoneNumberField.getText();
-        int quantityBought = Integer.parseInt(quantityBoughtField.getText());
+        String quantityBoughtText = quantityBoughtField.getText();
         Drug selectedDrug = drugsTable.getSelectionModel().getSelectedItem();
-        if (selectedDrug != null && customerName != null && customerPhoneNo != null && quantityBought != 0) {
+        // Select
+        if (selectedDrug == null && customerName.isEmpty() && customerPhoneNo.isEmpty() && quantityBoughtText.isEmpty()) {
+
+            sellErrorLabel.setText("Please select a drug and fill in all fields");
+            sellErrorLabel.setVisible(true);
+            return;
+        }
+
+        int quantityBought;
+        try {
+            quantityBought = Integer.parseInt(quantityBoughtText);
+        } catch (NumberFormatException e) {
+            sellErrorLabel.setText("Invalid quantity");
+            sellErrorLabel.setVisible(true);
+            return;
+        }
 
             int customerID = addCustomerToDatabase(customerName, customerPhoneNo);
 
@@ -268,36 +353,21 @@ public class InventoryController implements Initializable {
             customerPhoneNumberField.clear();
             customerNameField.clear();
             quantityBoughtField.clear();
-        }
+
+            sellErrorLabel.setText("");
+            sellErrorLabel.setVisible(false);
+
     }
 
 
 
-//    private void markDrugAsSold(int drugID) {
-//        String updateSql = "UPDATE Drugs SET purchased = 'yes' WHERE drugID =?";
-//        String insertSql = "INSERT INTO Purchase (drugID, price_sold, date_time) SELECT drugID, unitPrice,? FROM Drugs WHERE drugID =?";
-//
-//        try (Connection connection = dbConnection.getConnection();
-//             PreparedStatement updateStmt = connection.prepareStatement(updateSql);
-//             PreparedStatement insertStmt = connection.prepareStatement(insertSql)) {
-//
-//            updateStmt.setInt(1, drugID);
-//            updateStmt.executeUpdate();
-//
-//            insertStmt.setString(1, Timestamp.valueOf(LocalDateTime.now()).toString());
-//            insertStmt.setInt(2, drugID);
-//
-//            insertStmt.executeUpdate();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+
 
     private void processDrugSale(int drugID, int quantityBought) {
         String updateSql = "UPDATE Drugs SET numOfUnits = numOfUnits - ?, available = CASE WHEN numOfUnits = 0 THEN 'yes' ELSE available END WHERE drugID =?";
         String querySql = "SELECT numOfUnits FROM Drugs WHERE drugID =?";
         String insertSql = "INSERT INTO Purchase (drugID, price_sold, date_time) SELECT drugID, unitPrice,? FROM Drugs WHERE drugID =?";
-
+//        String insertQuantity = "INSERT INTO Purchase quantity ";
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement updateStmt = connection.prepareStatement(updateSql);
              PreparedStatement queryStmt = connection.prepareStatement(querySql);
@@ -308,6 +378,7 @@ public class InventoryController implements Initializable {
             updateStmt.executeUpdate();
 
             queryStmt.setInt(1, drugID);
+
             ResultSet resultSet = queryStmt.executeQuery();
             if (resultSet.next() && resultSet.getInt("numOfUnits") == 0) {
                 insertStmt.setString(1, Timestamp.valueOf(LocalDateTime.now()).toString());
@@ -370,8 +441,8 @@ public class InventoryController implements Initializable {
     }
 
 
-    public void switchToNotification(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("notification-view.fxml")));
+    public void switchToSales(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sales-view.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
