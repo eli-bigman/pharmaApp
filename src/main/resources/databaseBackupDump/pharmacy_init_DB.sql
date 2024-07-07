@@ -18,7 +18,8 @@
 --
 -- Table structure for table `customers`
 --
-
+CREATE DATABASE elipharma;
+USE elipharma;
 
 DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

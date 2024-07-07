@@ -118,7 +118,7 @@ public class InventoryController implements Initializable {
             // Database connection and data retrieval
             try (Connection conn = dbConnection.getConnection();
                  Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery("SELECT * FROM Drugs WHERE available = 'yes'")) {
+                 ResultSet rs = stmt.executeQuery("SELECT * FROM drugs ")) {
 
                 while (rs.next()) {
                    int drugID = rs.getInt("drugID");
@@ -138,6 +138,7 @@ public class InventoryController implements Initializable {
             }
 
             drugsTable.setItems(drugList);
+            drugsTable.refresh();
     }
 
 //    @FXML
@@ -178,7 +179,7 @@ public class InventoryController implements Initializable {
         String supplierContactInfo = supplierContactInfoField.getText();
 
         if (drugName.isEmpty() || unitPriceStr.isEmpty() || numOfUnitsStr.isEmpty() || description.isEmpty() || supplierName.isEmpty() || supplierLocation.isEmpty() || supplierContactInfo.isEmpty()) {
-            errorLabel.setText("Please fill in all fields");
+            errorLabel.setText("Invalid");
             errorLabel.setVisible(true);
             return;
         }
