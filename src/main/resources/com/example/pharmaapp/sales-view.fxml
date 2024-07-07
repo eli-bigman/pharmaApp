@@ -47,7 +47,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton contentDisplay="RIGHT" layoutX="808.0" layoutY="7.0" prefHeight="46.0" prefWidth="192.0" style="-fx-background-color: #ffffff; -fx-font-family: Poppins; -fx-font-size: 14; -fx-border-color: #1D242E; -fx-border-radius: 10; -fx-background-radius: 10;" text="Download Sales Report">
+                  <JFXButton contentDisplay="RIGHT" layoutX="808.0" layoutY="7.0" onAction="#handleGenerateReport" prefHeight="46.0" prefWidth="192.0" style="-fx-background-color: #ffffff; -fx-font-family: Poppins; -fx-font-size: 14; -fx-border-color: #1D242E; -fx-border-radius: 10; -fx-background-radius: 10;" text="Download Sales Report">
                      <font>
                         <Font name="Poppins Regular" size="14.0" />
                      </font>
@@ -80,7 +80,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" layoutX="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/dahboardIcon.png" />
+                              <Image url="@../../../images/Drugs-dashborad_Icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -92,7 +92,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true" x="21.0">
                            <image>
-                              <Image url="@../../../images/InventoryIcon.png" />
+                              <Image url="@../../../images/invenrtory_icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -104,7 +104,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/reportsIcon.png" />
+                              <Image url="@../../../images/report-100.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -119,7 +119,7 @@
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="26.0">
                            <image>
-                              <Image url="@../../../images/moneyIconBlack.png" />
+                              <Image url="@../../../images/money_icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -143,8 +143,8 @@
             <TableColumn fx:id="descriptionColumn" prefWidth="335.0" text="Description" />
         </columns>
       </TableView>
-      <Button layoutX="1180.0" layoutY="106.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="75.0" prefWidth="90.0" style="-fx-background-color: #ff3131; -fx-background-radius: 10;" text="Delete" />
-      <Button layoutX="1180.0" layoutY="288.0" mnemonicParsing="false" onAction="#handlePurchaseHistoryButton" prefHeight="75.0" prefWidth="90.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #d1e4f9;" text="Purchase History" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="1180.0" layoutY="106.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="127.0" prefWidth="90.0" style="-fx-background-color: #ff3131; -fx-background-radius: 10;" text="Delete Drug" />
+      <Button layoutX="1180.0" layoutY="254.0" mnemonicParsing="false" onAction="#handlePurchaseHistoryButton" prefHeight="109.0" prefWidth="90.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #d1e4f9;" text="Purchase History" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Poppins Regular" size="12.0" />
          </font>
@@ -167,11 +167,10 @@
             <Font name="Poppins SemiBold" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="653.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Drugs ">
+      <Text layoutX="652.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Drugs ">
          <font>
             <Font name="Poppins SemiBold" size="18.0" />
          </font>
       </Text>
-      <Button layoutX="1180.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleUndoDeleteButton" prefHeight="75.0" prefWidth="90.0" style="-fx-background-color: #35ffd1; -fx-background-radius: 10;" text="Undo Delete" />
    </children>
 </AnchorPane>

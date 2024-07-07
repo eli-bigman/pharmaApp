@@ -6,13 +6,14 @@ package com.example.pharmaapp;
  *
  * This class handles the logic for the Sales view, including populating the drug table, the sales history table and handling button clicks.
  *
- * @author Team Silicon
+ *
  */
 
 
 import com.example.pharmaapp.entities.Drug;
 import com.example.pharmaapp.database.sql.dbConnection;
 import com.example.pharmaapp.entities.Sale;
+import com.example.pharmaapp.utils.ReportGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -269,6 +270,11 @@ public class SalesController implements Initializable {
 
 
 
+    @FXML
+    private void handleGenerateReport(){
+        ReportGenerator reportGenerator = new ReportGenerator();
+        reportGenerator.generateReport();
+    }
 
 
     @FXML

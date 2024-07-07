@@ -2,6 +2,7 @@ package com.example.pharmaapp;
 
 // PharmacyController.java
 import com.example.pharmaapp.database.sql.dbConnection;
+import com.example.pharmaapp.utils.ReportGenerator;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,6 +39,9 @@ public class DashboardController {
 
     @FXML
     private JFXButton addButton;
+
+    @FXML
+    private Button generateButton;
 
     @FXML
     private TextField descriptionField;
@@ -114,6 +119,12 @@ public class DashboardController {
                 return resultSet.getInt("total_medicine_sold");
             }
         }
+    }
+
+    @FXML
+    private void handleGenerateReport(){
+        ReportGenerator reportGenerator = new ReportGenerator();
+        reportGenerator.generateReport();
     }
 
 

@@ -4,6 +4,7 @@ import com.example.pharmaapp.database.sql.dbConnection;
 import com.example.pharmaapp.entities.Customer;
 import com.example.pharmaapp.entities.Purchase;
 import com.example.pharmaapp.entities.Supplier;
+import com.example.pharmaapp.utils.ReportGenerator;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -166,7 +167,7 @@ public class ReportController implements Initializable {
                 Customer customer = new Customer(
                         resultSet.getInt("id"),
                         resultSet.getString("customerName"),
-                        resultSet.getString("contactInfo")
+                        resultSet.getString("phoneNumber")
                 );
 
                 customerList.add(customer);
@@ -174,6 +175,15 @@ public class ReportController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+
+    @FXML
+    private void handleGenerateReport(){
+        ReportGenerator reportGenerator = new ReportGenerator();
+        reportGenerator.generateReport();
     }
 
 
