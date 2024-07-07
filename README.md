@@ -56,7 +56,7 @@ This is a simple pharmacy management application developed in Java using JavaFX 
    mysql -u [username] -p
    creat database pharmacyDB;
    use pharmacyDB;
-   
+   exit
    
  - run the following command to create the MySQL database and import the initial database schema:
 
