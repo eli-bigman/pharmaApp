@@ -89,7 +89,11 @@ public class SalesController implements Initializable {
 
     private ObservableList<Drug> drugList;
 
+    /**
+     // Initializes Interface
+     *
 
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize drug table columns
@@ -119,14 +123,17 @@ public class SalesController implements Initializable {
         purchaseHistoryTable.setItems(purchaseHistory);
 
     }
-
+    /**
+     // Load drugs from database
+     *
+     */
     private void loadDrugData() {
         drugList = FXCollections.observableArrayList();
 
         // Database connection and data retrieval
         try (Connection conn = dbConnection.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM Drugs WHERE available = 'yes'")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM Drugs")) {
 
             while (rs.next()) {
                 int drugID = rs.getInt("drugID");
@@ -179,7 +186,13 @@ public class SalesController implements Initializable {
 
     //Store the drug Id of recently deleted drug
     private int recentDeletedDrugID;
-
+    /**
+     // Deletes drugs from database and system
+     *
+     */ /**
+     // Load Suppliers from database
+     *
+     */
     @FXML
     private void handleDeleteButton(ActionEvent event) {
         Drug selectedDrug = drugsTable.getSelectionModel().getSelectedItem();
@@ -187,8 +200,7 @@ public class SalesController implements Initializable {
         if (selectedDrug != null) {
             // Delete the drug from the database
             try (Connection conn = dbConnection.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement("UPDATE drugs " +
-                         "SET available = 'no', deleted = true " +
+                 PreparedStatement stmt = conn.prepareStatement("DELETE FROM drugs " +
                          "WHERE drugID = ?;")) {
                 recentDeletedDrugID = selectedDrug.getDrugID();
                 stmt.setInt(1, selectedDrug.getDrugID());
@@ -199,6 +211,8 @@ public class SalesController implements Initializable {
             // Remove the drug from the table
             drugList.remove(selectedDrug);
             drugsTable.getItems().remove(selectedDrug);
+            InventoryController.refreshDrugTable();
+
         }
     }
 
@@ -227,7 +241,11 @@ public class SalesController implements Initializable {
 
 
 
-
+    /**
+     // Load Suppliers from database
+     *
+     * @param event Button click (purchase history)
+     */
     @FXML
     private void handlePurchaseHistoryButton(ActionEvent event) {
         Drug selectedDrug = drugsTable.getSelectionModel().getSelectedItem();
@@ -269,6 +287,10 @@ public class SalesController implements Initializable {
 
 
 
+    /**
+     // Generates reports
+     *
+     */
 
     @FXML
     private void handleGenerateReport(){

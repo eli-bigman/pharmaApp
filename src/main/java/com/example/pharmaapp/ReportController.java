@@ -86,7 +86,11 @@ public class ReportController implements Initializable {
 
     private ObservableList<Customer> customerList = FXCollections.observableArrayList();;
 
+    /**
+     // Initializes Interface
+     *
 
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         purchaseIdColumn.setCellValueFactory(new PropertyValueFactory<>("purchaseID"));
@@ -117,7 +121,10 @@ public class ReportController implements Initializable {
 //        supplierTable.setItems(supplierList);
 //    }
 
-    private void loadSuppliers() {
+    /**
+     // Load Suppliers from database
+     *
+     */  private void loadSuppliers() {
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Suppliers")) {
             ResultSet resultSet = pstmt.executeQuery();
@@ -136,7 +143,10 @@ public class ReportController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    /**
+     // Load purchases from database
+     *
+     */
     private void loadPurchases() {
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Purchase")) {
@@ -157,7 +167,10 @@ public class ReportController implements Initializable {
         }
 
     }
-
+    /**
+     // Load customers from database
+     *
+     */
     private void loadCustomers() {
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Customers")) {

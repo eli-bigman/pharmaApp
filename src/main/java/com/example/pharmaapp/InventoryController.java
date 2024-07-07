@@ -32,6 +32,10 @@ public class InventoryController implements Initializable {
 
     @FXML
     private TableView<Drug> drugsTable;
+    public static void refreshDrugTable(){
+       InventoryController x=new InventoryController();
+       x.loadDrugData();}
+
     @FXML
     private TableColumn<Drug, Integer> drugIDColumn;
     @FXML
@@ -111,7 +115,11 @@ public class InventoryController implements Initializable {
         // Load data from database
         loadDrugData();
     }
-
+    /**
+     // Retrieves drugs from database to be displayed in drug table
+     *
+     *
+     */
     private void loadDrugData() {
             drugList = FXCollections.observableArrayList();
 
@@ -169,6 +177,13 @@ public class InventoryController implements Initializable {
 
 
     @FXML
+    /**
+     // Adds drug to system and database
+     *
+     * @param event A click event
+     *
+     *
+     */
     private void addButtonClicked(ActionEvent event) {
         String drugName = drugNameField.getText();
         String unitPriceStr = unitPriceField.getText();
@@ -209,6 +224,13 @@ public class InventoryController implements Initializable {
 
 
     @FXML
+    /**
+     // Searched based on any column
+     *
+     * @param event A click event
+     *
+     *
+     */
     private void searchButtonClicked(ActionEvent event) {
         String searchText = searchField.getText().trim().toLowerCase();
 
@@ -254,7 +276,16 @@ public class InventoryController implements Initializable {
 //
 //    }
 
-
+    /**
+     // Adds drug to database
+     *
+     *@param drugName drug name
+     *@param unitPrice unit price of drug
+     * @param numOfUnits num of units in stock
+     * @param  description description of drug
+     *
+     *
+     */
     private void addDrugToDatabase(String drugName, double unitPrice, int numOfUnits, String description, String supplier) {
         String sql = "INSERT INTO Drugs (drugName, unitPrice, numOfUnits, supplier, description) VALUES (?, ?, ?, ?, ?)";
 
@@ -274,7 +305,16 @@ public class InventoryController implements Initializable {
         }
     }
 
-
+    /**
+     // Adds supplier to database
+     *
+     *@param supplierName supplier name
+     *@param supplierContactInfo contact of drug
+     * @param supplierLocation location of supplier
+     *
+     *
+     *
+     */
     private void addSupplierToDatabase(String supplierName, String supplierContactInfo, String supplierLocation) {
         String sql = "INSERT INTO Suppliers (supplierName,location,contactInfo) VALUES (?, ?, ?)";
 
@@ -293,8 +333,17 @@ public class InventoryController implements Initializable {
     }
 
 
+    /**
+     // Adds drug to database
+     *
+     *@param customerName customer name
+     *@param customerPhoneNo customer contact info
+     *
+     *
+     */
+
     private int addCustomerToDatabase(String customerName, String customerPhoneNo) {
-        String sql = "INSERT INTO Customers (customerName, contactInfo) VALUES (?, ?)";
+        String sql = "INSERT INTO Customers (customerName, phoneNumber) VALUES (?, ?)";
         int customerID = 0;
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -319,8 +368,13 @@ public class InventoryController implements Initializable {
 
 
 
-    //Handle purchase logic
-
+    /**
+     //Handle purchase logic
+     *
+     * @param event A click event
+     *
+     *
+     */
     @FXML
     private void sellButtonClicked(ActionEvent event) {
         //add drugs to purchased and create a new customer object
@@ -344,10 +398,10 @@ public class InventoryController implements Initializable {
             sellErrorLabel.setVisible(true);
             return;
         }
-
+if(quantityBought<selectedDrug.getNumOfUnits()){
             int customerID = addCustomerToDatabase(customerName, customerPhoneNo);
 
-            addPurchaseToDatabase(selectedDrug.getDrugID(), selectedDrug.getUnitPrice(), customerID);
+            addPurchaseToDatabase(selectedDrug.getDrugID(), selectedDrug.getUnitPrice()*quantityBought, customerID,quantityBought);
 
             processDrugSale(selectedDrug.getDrugID(), quantityBought);
             loadDrugData();
@@ -356,7 +410,10 @@ public class InventoryController implements Initializable {
             quantityBoughtField.clear();
 
             sellErrorLabel.setText("");
-            sellErrorLabel.setVisible(false);
+            sellErrorLabel.setVisible(false);}
+else{
+    sellErrorLabel.setText("Invalid quantity");
+    sellErrorLabel.setVisible(true);}
 
     }
 
@@ -364,6 +421,14 @@ public class InventoryController implements Initializable {
 
 
 
+    /**
+     // Drug sale logic
+     *
+     *@param drugID drugID
+     * @param quantityBought num of units bought
+     *
+     *
+     */
     private void processDrugSale(int drugID, int quantityBought) {
         String updateSql = "UPDATE Drugs SET numOfUnits = numOfUnits - ?, available = CASE WHEN numOfUnits = 0 THEN 'yes' ELSE available END WHERE drugID =?";
         String querySql = "SELECT numOfUnits FROM Drugs WHERE drugID =?";
@@ -391,8 +456,8 @@ public class InventoryController implements Initializable {
         }
     }
 
-    private void addPurchaseToDatabase(int drugID, double price_sold, int customerID) {
-        String sql = "INSERT INTO Purchase (drugID, price_sold, date_time, customerID) VALUES (?, ?, ?, ?)";
+    private void addPurchaseToDatabase(int drugID, double price_sold, int customerID,int quantityBought) {
+        String sql = "INSERT INTO Purchase (drugID, price_sold, date_time, customerID,quantity) VALUES (?, ?, ?, ?,?)";
 
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -401,6 +466,8 @@ public class InventoryController implements Initializable {
             pstmt.setDouble(2, price_sold);
             pstmt.setString(3, Timestamp.valueOf(LocalDateTime.now()).toString());
             pstmt.setInt(4, customerID);
+            pstmt.setInt(5, quantityBought);
+
 
             pstmt.executeUpdate();
 

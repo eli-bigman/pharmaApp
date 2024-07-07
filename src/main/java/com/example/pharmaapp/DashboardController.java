@@ -67,6 +67,12 @@ public class DashboardController {
         dbConnection = new dbConnection();
     }
 
+
+    /**
+     // Initializes Interface
+     *
+
+     */
     @FXML
     public void initialize() {
         updateDashboard();
@@ -91,6 +97,15 @@ public class DashboardController {
         }
     }
 
+
+    /**
+     // Gets Total Revenue
+     *
+     * @param connection An Sql connection object.
+     * @throws SQLException Exception thrown if connection to the database fails
+     * @return  The result set of the executed SQL query(total revenue).
+     *
+     */
     private double getTotalRevenue(Connection connection) throws SQLException {
         String query = "SELECT SUM(price_sold) AS total_revenue FROM purchase";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -100,7 +115,14 @@ public class DashboardController {
             }
         }
     }
-
+    /**
+     // Gets Total number Drugs in stick
+     *
+     * @param connection An Sql connection object.
+     * @throws SQLException Exception thrown if connection to the database fails
+     * @return  The result set of the executed SQL query(total number of drugs in stock).
+     *
+     */
     private int getTotalDrugsInStock(Connection connection) throws SQLException {
         String query = "SELECT COUNT(*) AS total_medicine_in_stock FROM drugs WHERE available = 'yes'";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -111,6 +133,15 @@ public class DashboardController {
         }
     }
 
+
+    /**
+     // Gets Total number of medicine sold
+     *
+     * @param connection An Sql connection object.
+     * @throws SQLException Exception thrown if connection to the database fails
+     * @return  The result set of the executed SQL query(v).
+     *
+     */
     private int getTotalMedicineSold(Connection connection) throws SQLException {
         String query = "SELECT COUNT(*) AS total_medicine_sold FROM purchase";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -128,6 +159,14 @@ public class DashboardController {
     }
 
 
+    /**
+     // Switches to the dashboard screen
+     *
+     * @param event A click event
+     * @throws IOException Exception thrown if file does not exist
+     *
+     *
+     */
     @FXML
     public void switchToDashboard(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/pharmaapp/dashboard-view.fxml")));
@@ -137,6 +176,14 @@ public class DashboardController {
         stage.show();
     }
 
+    /**
+     // Switches to the Inventory screen
+     *
+     * @param event A click event
+     * @throws IOException Exception thrown if file does not exist
+     *
+     *
+     */
     @FXML
     public void switchToInventory(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/pharmaapp/inventory-view.fxml")));
@@ -148,7 +195,14 @@ public class DashboardController {
         stage.show();
     }
 
-
+    /**
+     // Switches to the reports screen
+     *
+     * @param event A click event
+     * @throws IOException Exception thrown if file does not exist
+     *
+     *
+     */
     public void switchToReports(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/pharmaapp/reports-view.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -157,7 +211,14 @@ public class DashboardController {
         stage.show();
     }
 
-
+    /**
+     // Switches to the sales screen
+     *
+     * @param event A click event
+     * @throws IOException Exception thrown if file does not exist
+     *
+     *
+     */
     public void switchToSales(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/pharmaapp/sales-view.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
