@@ -1,0 +1,93 @@
+Purchase Report
+===============
+Purchase ID: 1
+Drug ID: 21
+Price Sold: 10.99
+Date and Time: 2024-06-24
+Customer ID: 3
+Quantity: 1
+
+Purchase ID: 2
+Drug ID: 22
+Price Sold: 5.99
+Date and Time: 2024-06-24
+Customer ID: 1
+Quantity: 1
+
+Purchase ID: 4
+Drug ID: 27
+Price Sold: 10.0
+Date and Time: 2024-06-24
+Customer ID: 4
+Quantity: 1
+
+Purchase ID: 5
+Drug ID: 27
+Price Sold: 10.0
+Date and Time: 2024-06-24
+Customer ID: 4
+Quantity: 1
+
+Purchase ID: 6
+Drug ID: 24
+Price Sold: 12.99
+Date and Time: 2024-06-24
+Customer ID: 2
+Quantity: 1
+
+Purchase ID: 7
+Drug ID: 24
+Price Sold: 12.99
+Date and Time: 2024-06-24
+Customer ID: 4
+Quantity: 1
+
+Purchase ID: 9
+Drug ID: 23
+Price Sold: 7.99
+Date and Time: 2024-06-27
+Customer ID: 2
+Quantity: 1
+
+Purchase ID: 11
+Drug ID: 27
+Price Sold: 10.0
+Date and Time: 2024-06-30
+Customer ID: 10
+Quantity: 1
+
+Purchase ID: 12
+Drug ID: 27
+Price Sold: 10.0
+Date and Time: 2024-06-30
+Customer ID: 11
+Quantity: 1
+
+Purchase ID: 13
+Drug ID: 27
+Price Sold: 10.0
+Date and Time: 2024-06-30
+Customer ID: 12
+Quantity: 1
+
+Purchase ID: 14
+Drug ID: 27
+Price Sold: 10.0
+Date and Time: 2024-06-30
+Customer ID: 2
+Quantity: 1
+
+Purchase ID: 15
+Drug ID: 24
+Price Sold: 12.99
+Date and Time: 2024-07-05
+Customer ID: 13
+Quantity: 1
+
+Purchase ID: 16
+Drug ID: 24
+Price Sold: 12.99
+Date and Time: 2024-07-05
+Customer ID: 14
+Quantity: 1
+
