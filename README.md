@@ -50,11 +50,20 @@ This is a simple pharmacy management application developed in Java using JavaFX 
    cd pharmaApp
 2. **Create MySQL Database:**
 
-    Open a command prompt and run the following command to create the MySQL database and import the initial database schema:
+ - Open a command prompt and create a mysql database
+   
+      ````bash
+   mysql -u [username] -p
+   creat database pharmacyDB;
+   use pharmacyDB;
+   
+   
+ - run the following command to create the MySQL database and import the initial database schema:
 
-    ````bash
-    cmd /c "mysql -u [mysql_username] -p pharmacyDB < src\main\resources\databaseBackupDump\pharmacy_init_DB.sql"
+   ````bash
+       cmd /c "mysql -u [mysql_username] -p pharmacyDB < src\main\resources\databaseBackupDump\pharmacy_init_DB.sql"
     
+   
 3. **Update Database Configuration:**
 
     After creating the MySQL database and importing the database, ensure to update the user and password in `src/main/java/com/example/pharmaapp/database/sql/dbConnection.java`.
