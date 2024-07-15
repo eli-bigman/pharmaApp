@@ -3,6 +3,7 @@ package com.example.pharmaapp;
 
 import com.example.pharmaapp.entities.Drug;
 import com.example.pharmaapp.database.sql.dbConnection;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,7 +50,7 @@ public class InventoryController implements Initializable {
     @FXML
     private TableColumn<Drug, String> descriptionColumn;
 
-    private ObservableList<Drug> drugList;
+    private ObservableSet<Drug> drugList;
 
     @FXML
     private TextField drugNameField;
@@ -121,7 +122,7 @@ public class InventoryController implements Initializable {
      *
      */
     private void loadDrugData() {
-            drugList = FXCollections.observableArrayList();
+            drugList = FXCollections.observableSet();
 
             // Database connection and data retrieval
             try (Connection conn = dbConnection.getConnection();
@@ -145,7 +146,7 @@ public class InventoryController implements Initializable {
                 e.printStackTrace();
             }
 
-            drugsTable.setItems(drugList);
+            drugsTable.setItems(FXCollections.observableArrayList(drugList));
             drugsTable.refresh();
     }
 
