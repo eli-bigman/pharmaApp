@@ -20,6 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.Objects;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -239,8 +240,9 @@ public class InventoryController implements Initializable {
             loadDrugData();
         } else {
             ObservableList<Drug> filteredList = FXCollections.observableArrayList();
-
-            for (Drug drug : drugList) {
+            Iterator<Drug> drugIterator=drugList.iterator();
+            while (drugIterator.hasNext()){
+                Drug drug=drugIterator.next();
                 if (drug.getDrugName().toLowerCase().contains(searchText) ||
                         String.valueOf(drug.getUnitPrice()).contains(searchText) ||
                         String.valueOf(drug.getNumOfUnits()).contains(searchText) ||
@@ -249,6 +251,8 @@ public class InventoryController implements Initializable {
                     filteredList.add(drug);
                 }
             }
+
+
             drugsTable.getItems().clear();
             drugsTable.getItems().addAll(filteredList);
             //drugsTable.setItems(filteredList);

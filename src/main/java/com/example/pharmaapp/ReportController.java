@@ -207,7 +207,7 @@ public class ReportController implements Initializable {
 
     @FXML
     public void switchToDashboard(ActionEvent event) throws IOException {
-       Switch.switchToDashboard(event);
+       Switch.switchToDashboard(event );
     }
 
     @FXML
