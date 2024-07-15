@@ -27,7 +27,7 @@ public class Customer {
     /**
      // Getter for ID
      *
-     * @return customerName Returns the ID of the customer.
+     * @return  Returns the ID of the customer.
      */
     public int getId() {
         return id;
@@ -40,8 +40,6 @@ public class Customer {
 
     /**
      // Getter for name
-     *
-     * @param phoneNumber The phone number of the customer.
      * @return customerName Returns the name of the customer.
      */
     public String getName() {

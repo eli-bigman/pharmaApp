@@ -1,6 +1,7 @@
 package com.example.pharmaapp.entities;
 
 // DrugSupplier.java
+//Drug and supplier relationship for the database
 public class DrugSupplier {
     private int drugSuppID;
     private int supplierID;
