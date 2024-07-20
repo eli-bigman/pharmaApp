@@ -25,6 +25,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -280,11 +282,30 @@ public class SalesController implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
+            //Comparator<Sale> x=new compareByTotalAmount();
+          //  FXCollections.sort(purchaseHistory,x);
             purchaseHistoryTable.setItems(purchaseHistory);
         }
     }
 
+class compareByTotalAmount implements Comparator<Sale> {
+
+
+    @Override
+    public int compare(Sale o1, Sale o2) {
+        return  Double.compare(o1.getTotalAmount(),o2.getTotalAmount());
+    }
+}
+
+    class compareByTime implements Comparator<Sale> {
+
+
+        @Override
+        public int compare(Sale o1, Sale o2) {
+            return o1.getPurchaseDate().compareTo(o2.getPurchaseDate());
+
+        }
+    }
 
 
     /**
@@ -294,6 +315,7 @@ public class SalesController implements Initializable {
 
     @FXML
     private void handleGenerateReport(){
+
         ReportGenerator reportGenerator = new ReportGenerator();
         reportGenerator.generateReport();
     }
