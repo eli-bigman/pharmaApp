@@ -119,3 +119,24 @@ Date and Time: 2024-07-07
 Customer ID: 19
 Quantity: 2
 
+Purchase ID: 25
+Drug ID: 30
+Price Sold: 30000.0
+Date and Time: 2024-07-20
+Customer ID: 20
+Quantity: 3
+
+Purchase ID: 26
+Drug ID: 30
+Price Sold: 100000.0
+Date and Time: 2024-07-24
+Customer ID: 21
+Quantity: 10
+
+Purchase ID: 27
+Drug ID: 30
+Price Sold: 90000.0
+Date and Time: 2024-07-25
+Customer ID: 22
+Quantity: 9
+

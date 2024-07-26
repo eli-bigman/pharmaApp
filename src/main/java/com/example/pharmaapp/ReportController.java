@@ -3,11 +3,13 @@ package com.example.pharmaapp;
 import com.example.pharmaapp.database.sql.dbConnection;
 import com.example.pharmaapp.entities.Customer;
 import com.example.pharmaapp.entities.Purchase;
+import com.example.pharmaapp.entities.Sale;
 import com.example.pharmaapp.entities.Supplier;
 import com.example.pharmaapp.utils.ReportGenerator;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +34,10 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ReportController implements Initializable {
+
+    ObservableSet<Customer> customerSet;
+    ObservableSet<Supplier> supplierSet;
+    ObservableSet<Purchase> purchaseSet;
 
 
     @FXML
@@ -106,13 +112,11 @@ public class ReportController implements Initializable {
         supplierNameColumn.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
         supplierLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         supplierContactInfoColumn.setCellValueFactory(new PropertyValueFactory<>("contactInfo"));
-        supplierTable.setItems(supplierList);
         loadSuppliers();
 
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         customerContactInfoColumn.setCellValueFactory(new PropertyValueFactory<>("contactInfo"));
-        customerTable.setItems(customerList);
         loadCustomers();
     }
 
@@ -125,6 +129,8 @@ public class ReportController implements Initializable {
      // Load Suppliers from database
      *
      */  private void loadSuppliers() {
+         supplierSet=FXCollections.observableSet();
+
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Suppliers")) {
             ResultSet resultSet = pstmt.executeQuery();
@@ -137,17 +143,20 @@ public class ReportController implements Initializable {
                         resultSet.getString("contactInfo")
                 );
 
-                supplierList.add(supplier);
+                supplierSet.add(supplier);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        supplierTable.setItems(FXCollections.observableArrayList(supplierSet));
+
     }
     /**
      // Load purchases from database
      *
      */
     private void loadPurchases() {
+        purchaseSet=FXCollections.observableSet();
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Purchase")) {
             ResultSet resultSet = pstmt.executeQuery();
@@ -160,11 +169,12 @@ public class ReportController implements Initializable {
                         resultSet.getInt("customerID")
                 );
 
-                purchaseList.add(purchase);
+                purchaseSet.add(purchase);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        purchaseTable.setItems(FXCollections.observableArrayList(purchaseSet));
 
     }
     /**
@@ -172,6 +182,8 @@ public class ReportController implements Initializable {
      *
      */
     private void loadCustomers() {
+        customerSet = FXCollections.observableSet();
+
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Customers")) {
             ResultSet resultSet = pstmt.executeQuery();
@@ -183,11 +195,13 @@ public class ReportController implements Initializable {
                         resultSet.getString("phoneNumber")
                 );
 
-                customerList.add(customer);
+                customerSet.add(customer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        customerTable.setItems(FXCollections.observableArrayList(customerSet));
+
     }
 
 

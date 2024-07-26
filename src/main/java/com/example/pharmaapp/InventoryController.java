@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 
 import java.io.BufferedWriter;
@@ -123,7 +125,7 @@ public class InventoryController implements Initializable {
      *
      */
     private void loadDrugData() {
-            drugList = FXCollections.observableSet();
+            drugList = FXCollections.observableSet(); //Set will not allow duplicates
 
             // Database connection and data retrieval
             try (Connection conn = dbConnection.getConnection();
@@ -193,10 +195,10 @@ public class InventoryController implements Initializable {
         String description = descriptionField.getText();
         String supplierName = supplierNameField.getText();
         String supplierLocation = supplierLocationField.getText();
-        String supplierContactInfo = supplierContactInfoField.getText();
+        String supplierContactInfo = supplierContactInfoField.getText(); //Retrieves the text typed in the fields of application
 
         if (drugName.isEmpty() || unitPriceStr.isEmpty() || numOfUnitsStr.isEmpty() || description.isEmpty() || supplierName.isEmpty() || supplierLocation.isEmpty() || supplierContactInfo.isEmpty()) {
-            errorLabel.setText("Invalid");
+            errorLabel.setText("Invalid Entry");
             errorLabel.setVisible(true);
             return;
         }
@@ -399,11 +401,11 @@ public class InventoryController implements Initializable {
         try {
             quantityBought = Integer.parseInt(quantityBoughtText);
         } catch (NumberFormatException e) {
-            sellErrorLabel.setText("Invalid quantity");
+            sellErrorLabel.setText("Invalid number format");
             sellErrorLabel.setVisible(true);
             return;
         }
-if(quantityBought<selectedDrug.getNumOfUnits()){
+if(quantityBought<selectedDrug.getNumOfUnits() && phoneNumValidator(customerPhoneNo)){
             int customerID = addCustomerToDatabase(customerName, customerPhoneNo);
 
             addPurchaseToDatabase(selectedDrug.getDrugID(), selectedDrug.getUnitPrice()*quantityBought, customerID,quantityBought);
@@ -416,9 +418,14 @@ if(quantityBought<selectedDrug.getNumOfUnits()){
 
             sellErrorLabel.setText("");
             sellErrorLabel.setVisible(false);}
-else{
+else if(quantityBought>selectedDrug.getNumOfUnits()){
     sellErrorLabel.setText("Invalid quantity");
     sellErrorLabel.setVisible(true);}
+
+else if (!phoneNumValidator(customerPhoneNo)){
+            sellErrorLabel.setText("Invalid Phone number");
+            sellErrorLabel.setVisible(true);
+        }
 
     }
 
@@ -504,6 +511,13 @@ else{
 
     public void switchToSales(ActionEvent event) throws IOException {
         Switch.switchToSales(event);
+    }
+
+    public static Boolean phoneNumValidator(String number){
+        String regex = "^0\\d{9}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
     }
 
 }
