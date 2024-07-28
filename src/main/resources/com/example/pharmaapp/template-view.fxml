@@ -62,7 +62,7 @@
                         <Image url="@../../../images/heath-3.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="103.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kwame Anderson">
+                  <Text layoutX="103.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ama Anderson">
                      <font>
                         <Font name="Poppins Regular" size="14.0" />
                      </font>
@@ -118,7 +118,7 @@
                   </JFXButton>
                   <ImageView fitHeight="64.0" fitWidth="65.0" layoutX="21.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/profile.png" />
+                        <Image url="@../../../images/img.png" />
                      </image>
                   </ImageView>
                </children>
