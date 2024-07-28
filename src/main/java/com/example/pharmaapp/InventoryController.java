@@ -97,6 +97,10 @@ public class InventoryController implements Initializable {
     private TextField searchField;
 
 
+    @FXML
+    private JFXButton deleteButton;
+
+
 
 
 
@@ -126,7 +130,7 @@ public class InventoryController implements Initializable {
             // Database connection and data retrieval
             try (Connection conn = dbConnection.getConnection();
                  Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery("SELECT * FROM drugs ")) {
+                 ResultSet rs = stmt.executeQuery("SELECT * FROM drugs where deleted = 0 ")) {
 
                 while (rs.next()) {
                    int drugID = rs.getInt("drugID");
@@ -475,6 +479,29 @@ else{
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void deleteButtonClicked(ActionEvent event) {
+        Drug selectedDrug = drugsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedDrug != null) {
+            // Delete the drug from the database
+            try (Connection conn = dbConnection.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement("UPDATE drugs SET Deleted = 1 WHERE drugID = ?")) {
+                stmt.setInt(1, selectedDrug.getDrugID());
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            // Remove the drug from the table
+            drugList.remove(selectedDrug);
+            drugsTable.getItems().remove(selectedDrug);
+//            InventoryController.refreshDrugTable();
+
+        }
+    }
+
+
 
     // Switch Screens
     @FXML

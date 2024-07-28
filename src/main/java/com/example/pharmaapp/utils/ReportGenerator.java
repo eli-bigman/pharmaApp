@@ -87,7 +87,7 @@ public class ReportGenerator {
     private void openReport() {
         try {
             Desktop desktop = Desktop.getDesktop();
-            File file = new File("SalesReport.txt");
+            File file = new File("report.txt");
             desktop.open(file);
         } catch (IOException e) {
             e.printStackTrace();

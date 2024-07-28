@@ -91,31 +91,3 @@ Date and Time: 2024-07-05
 Customer ID: 14
 Quantity: 1
 
-Purchase ID: 21
-Drug ID: 30
-Price Sold: 10000.0
-Date and Time: 2024-07-07
-Customer ID: 16
-Quantity: 0
-
-Purchase ID: 22
-Drug ID: 30
-Price Sold: 10000.0
-Date and Time: 2024-07-07
-Customer ID: 17
-Quantity: 0
-
-Purchase ID: 23
-Drug ID: 30
-Price Sold: 50000.0
-Date and Time: 2024-07-07
-Customer ID: 18
-Quantity: 5
-
-Purchase ID: 24
-Drug ID: 28
-Price Sold: 20.0
-Date and Time: 2024-07-07
-Customer ID: 19
-Quantity: 2
-
