@@ -134,7 +134,7 @@
                      <children>
                         <Pane prefHeight="159.0" prefWidth="212.0" style="-fx-border-color: #01A768;">
                            <children>
-                              <JFXButton alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutY="123.0" onAction="#switchToReports" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #02a667; -fx-border-color: #02a667;" text="View Detailed Report" textAlignment="CENTER" underline="true">
+                              <JFXButton alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutY="123.0" onAction="#switchToInventory" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #02a667; -fx-border-color: #02a667;" text="View Detailed Report" textAlignment="CENTER" underline="true">
                                  <graphic>
                                     <ImageView depthTest="ENABLE" fitHeight="16.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -225,7 +225,7 @@
                                     <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Text>
-                              <JFXButton alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="12.0" layoutX="1.0" layoutY="121.0" onAction="#switchToReports" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #1f8fe8; -fx-border-color: #1f8fe8;" text="View Detailed Report" textAlignment="JUSTIFY" underline="true">
+                              <JFXButton alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="12.0" layoutX="1.0" layoutY="121.0" onAction="#switchToInventory" prefHeight="31.0" prefWidth="212.0" style="-fx-background-color: #1f8fe8; -fx-border-color: #1f8fe8;" text="View Detailed Report" textAlignment="JUSTIFY" underline="true">
                                  <graphic>
                                     <ImageView depthTest="ENABLE" fitHeight="16.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -263,7 +263,7 @@
                                     <Font name="Poppins Regular" size="14.0" />
                                  </font>
                               </Text>
-                              <JFXButton alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutY="123.0" onAction="#switchToReports" prefHeight="31.0" prefWidth="212.0" ripplerFill="#f0473e48" style="-fx-background-color: #f0483e; -fx-border-color: #f0483e;" text="Resolve Now" textAlignment="JUSTIFY" underline="true">
+                              <JFXButton alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutY="123.0" onAction="#switchToInventory" prefHeight="31.0" prefWidth="212.0" ripplerFill="#f0473e48" style="-fx-background-color: #f0483e; -fx-border-color: #f0483e;" text="Resolve Now" textAlignment="JUSTIFY" underline="true">
                                  <graphic>
                                     <ImageView depthTest="ENABLE" fitHeight="16.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
